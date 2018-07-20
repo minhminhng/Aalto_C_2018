@@ -3,11 +3,9 @@
 
 int main(void)
 {
-    /* Feel free to modify this function to test different things */
-    /* For example, you can temporarily hide unimplemented functions
-     * inside comments */
-
-    AnyData array[5];
+	// gcc -pthread -g -Wall -Wvla -std=c99 -o test anydata.c main.c 
+	
+	AnyData array[5];
     
     array[0] = setDouble(3.14159);
     array[1] = setString("Merkkijono");
@@ -19,4 +17,5 @@ int main(void)
         printValue(array[i]);
         printf("\n");
     }
+    return 0;
 }

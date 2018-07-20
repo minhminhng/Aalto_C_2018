@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "anydata.h"
 
 
@@ -7,14 +9,26 @@
  */
 AnyData setDouble(double value)
 {
+	AnyData new;
+	new.type = DOUBLE;
+	new.value.dval = value;
+	return new;
 }
 
 AnyData setInt(int value)
 {
+	AnyData new;
+	new.type = INT;
+	new.value.ival = value;
+	return new;
 }
 
 AnyData setString(char* value)
 {
+	AnyData new;
+	new.type = STRING;
+	strcpy(new.value.sval, value);
+	return new;
 }
 
 
@@ -38,4 +52,17 @@ void printString(char* val)
  */
 void printValue(AnyData val)
 {
+	switch (val.type){
+		case INT:
+			printInt(val.value.ival);
+			break;
+		case DOUBLE:
+			printDouble(val.value.dval);
+			break;
+		case STRING:
+			printString(val.value.sval);
+			break;
+		default:
+			break;
+	}
 }
