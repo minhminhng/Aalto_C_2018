@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include "xorcipher.h"
 
@@ -11,7 +12,20 @@
  */
 void confidentiality_xor(uint32_t key, void* data, int len)
 {
-
+	printf("%lu \n", len * sizeof(uint32_t));
+	unsigned int *newKey = malloc(len * sizeof(uint32_t));
+	//unsigned int *newKey = malloc(len * sizeof(uint32_t));
+	//*data = * (unsigned int)*data;
+	for (unsigned int k = 0; k < len; k++)
+	{
+		newKey[k] = newKey[k] | key;
+	}
+	print_uint32_hex(newKey, len);
+	printf("\n");
+	data  = (void *)((uintptr_t)data ^ (uintptr_t)newKey);
+	//print_uint32_hex(data, len);
+	printf("\n");
+	free(newKey);
 }
 
 /*

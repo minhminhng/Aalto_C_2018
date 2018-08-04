@@ -14,8 +14,12 @@ int main()
 	uint32_t confidentiality_key = rand();
 
 	uint32_t copy_key = confidentiality_key;
+	printf("%lu ", sizeof(copy_key));
+	printf("%lu ", sizeof(int));
+	
 
 	char cryptme[] = "This is a test string to try";
+	printf("%lu \n ", sizeof(cryptme));
 	int stringlen = ((strlen(cryptme) + 1) / sizeof(uint32_t)) + ((strlen(cryptme) + 1) % sizeof(uint32_t) ? 1 : 0);
 
 	printf("%d", stringlen);
