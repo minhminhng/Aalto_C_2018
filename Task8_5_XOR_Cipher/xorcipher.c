@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include "xorcipher.h"
-
-
 
 /*
  * Encrypts / decrypts the void* buffer named <data>
@@ -12,20 +11,24 @@
  */
 void confidentiality_xor(uint32_t key, void* data, int len)
 {
-	printf("%lu \n", len * sizeof(uint32_t));
-	unsigned int *newKey = malloc(len * sizeof(uint32_t));
-	//unsigned int *newKey = malloc(len * sizeof(uint32_t));
-	//*data = * (unsigned int)*data;
+	// unsigned int *newKey = malloc(len * sizeof(uint32_t));
+	// for (unsigned int k = 0; k < len; k++)
+	// {
+	// 	newKey[k] = newKey[k] | key;
+	// }
+	// print_uint32_hex(newKey, len);
+	// printf("\n");
+	// data  = (void *)((uintptr_t)data ^ (uintptr_t)newKey);
+	//print_uint32_hex(data, len);
+
+	// Method 1: XOR and shift the key
 	for (unsigned int k = 0; k < len; k++)
 	{
-		newKey[k] = newKey[k] | key;
+		uint32_t new = (((uint32_t *)data)[k*4]) ^ (key);
+		//memcpy(data, new, 4);
+		print_uint32_hex(&new, 8);
 	}
-	print_uint32_hex(newKey, len);
 	printf("\n");
-	data  = (void *)((uintptr_t)data ^ (uintptr_t)newKey);
-	//print_uint32_hex(data, len);
-	printf("\n");
-	free(newKey);
 }
 
 /*
@@ -41,7 +44,8 @@ void confidentiality_xor_shift(uint32_t key, void* data, int len)
 
 void print_uint32_hex(void* data, int len)
 {
-	for(int i = 0; i < len; i++) printf("0x%08x ", ((uint32_t*)data)[i]);
+	for(int i = 0; i < len; i++){
+		printf("0x%08x ", ((uint32_t*)data)[i]);
+	}
 	printf("\n");
 }
-
