@@ -36,12 +36,12 @@ int main(void) {
     printf("arr[1] is 0x%02X, should be 0x40\n", arr[1]);
 
 
-    
+
     /* for practice: make your own op_bit_unset tests here */
     printf("\n*** Testing your op_bit_unset function..\n");
 
     printf("At first arr[0] == 0x%02X and arr[1] == 0x%02X\n", arr[0], arr[1]);
-    
+
     printf("Unsetting bit 9\n");
     op_bit_unset(arr, 9);
     printf("arr[0] is 0x%02X, should be 0xD0\n", arr[0]);
@@ -88,13 +88,13 @@ int main(void) {
     printf("Printing out 11111111, got ");
     op_print_byte(b); // This should print out 11111111
     printf("\n");
-    
+
     /* op_bit_get_sequence tests */
     printf("\n*** Testing your op_bit_get_sequence function..\n");
     op_print_byte(arr[0]);
     printf("\n");
     op_print_byte(arr[1]);
-printf("\n");
+    printf("\n");
     printf("Getting sequence... Should be 0x68, was 0x%02X\n", op_bit_get_sequence(arr, 0, 7));
 
     return 0;

@@ -20,11 +20,18 @@ void confidentiality_xor(uint32_t key, void* data, int len)
 	// printf("\n");
 	// data  = (void *)((uintptr_t)data ^ (uintptr_t)newKey);
 	//print_uint32_hex(data, len);
+    // printf("Original data: \n");
+    //
+    // print_uint32_hex(data, 8);
+    printf("Crypted data: \n");
+    char new[len*8];
+    char new2[len*8];
+    char *
 
 	// Method 1: XOR and shift the key
 	for (unsigned int k = 0; k < len; k++)
 	{
-		uint32_t new = (((uint32_t *)data)[k*4]) ^ (key);
+		new[k*4] = (((uint32_t *)data)[k*4]) ^ (key);
 		//memcpy(data, new, 4);
 		print_uint32_hex(&new, 8);
 	}

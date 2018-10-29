@@ -20,4 +20,8 @@ Tasks:
 * [Task 2.3 Calculator](Task2_3_Calculator/README.md) - Learn how to use conditional statements and formatted input and output using *scanf* and *printf*.
 
 ### Week 8 - Binary operators
+* [Task 8.1 Bit manipulation I](Task8_1_Bitwise/README.md) - Getting familiar with basic bitwise operations.
+* [Task 8.2 Bit manipulation II](Task8_2_Bitmanipulation/README.md) - Getting familiar with basic bitwise operations.
+* [Task 8.3 Bitmasks](Task8_3_Bitmasks/README.md) - Operating on selected bit or set of bits.
+* [Task 8.4 TCP header](Task8_4_TCP_Header/README.md) - TCP header.
 * [Task 8.5 XOR Cipher](Task8_5_XOR_Cipher/README.md) - Get familiar with bitwise operation with longer data types.
