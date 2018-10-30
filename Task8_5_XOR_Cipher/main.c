@@ -11,7 +11,7 @@ int main()
 	srand(time(NULL));
 
 	// uint32_t confidentiality_key = 0x00000000;
-	uint32_t confidentiality_key = rand();
+	uint32_t confidentiality_key =  0x32e25916;//rand();
 
 	uint32_t copy_key = confidentiality_key;
 	//printf("%lu ", sizeof(copy_key));
@@ -31,27 +31,27 @@ int main()
 
 	confidentiality_xor(confidentiality_key,(void*)cryptme, stringlen);
 
-	// printf("After ciphered: %s\n", cryptme);
-	// print_uint32_hex(cryptme, stringlen);
-	//
-	// confidentiality_xor(copy_key,(void*)cryptme,8);
-	//
-	// printf("After deciphered: %s\n", cryptme);
-	// print_uint32_hex(cryptme, stringlen);
+	printf("After ciphered: %s\n", cryptme);
+	print_uint32_hex(cryptme, stringlen);
 
-	// copy_key = confidentiality_key;
-	//
-	// printf("Before ciphered: %s\n", cryptme);
-	//
-	// confidentiality_xor_shift(confidentiality_key,(void*)cryptme, stringlen);
-	//
-	// printf("After ciphered with shift: %s\n", cryptme);
-	// print_uint32_hex(cryptme, stringlen);
-	//
-	// confidentiality_xor_shift(copy_key,(void*)cryptme,8);
-	//
-	// printf("After decciphered with shift: %s\n", cryptme);
-	// print_uint32_hex(cryptme, stringlen);
+	confidentiality_xor(copy_key,(void*)cryptme,8);
+
+	printf("After deciphered: %s\n", cryptme);
+	print_uint32_hex(cryptme, stringlen);
+
+	copy_key = confidentiality_key;
+
+	printf("Before ciphered: %s\n", cryptme);
+
+	confidentiality_xor_shift(confidentiality_key,(void*)cryptme, stringlen);
+
+	printf("After ciphered with shift: %s\n", cryptme);
+	print_uint32_hex(cryptme, stringlen);
+
+	confidentiality_xor_shift(copy_key,(void*)cryptme,8);
+
+	printf("After decciphered with shift: %s\n", cryptme);
+	print_uint32_hex(cryptme, stringlen);
 
 
 	return 0;
