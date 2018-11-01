@@ -3,64 +3,69 @@
 #include <string.h>
 #include "filebasics.h"
 
-int print_file(const char *filename)
-{
-	/* Read the file with filename and print to the standard output 
-	 */ 
-	FILE *f = fopen(filename, "r");
-	if (!f){
-		return -1;
-	}
-	unsigned int count = 0;
-	unsigned int c;
-	while ((c = getc(f)) != EOF){
-		putchar(c);
+int print_file(const char *filename){
+	FILE *fp;
+	fp = fopen(filename,"r");
+    if (!fp) {
+    	return -1;
+    }
+	int c = fgetc(fp);
+	int count = 0;
+	while(c!=EOF){
+		printf("%c", c);
+		c = fgetc(fp);
 		count++;
 	}
-	fclose(f);
+    fclose(fp);
 	return count;
-	
 }
 
-char *difference(const char* file1, const char* file2)
-{
-	/* Compare the two file and print the first different line between them
-	 * */
-	FILE *f1 = fopen(file1, "r");
-	FILE *f2 = fopen(file2, "r");
-	
-	if (!f1 | !f2){
-		fclose(f1);
-		fclose(f2);
-		return NULL;
+char* difference(const char *file1, const char* file2){
+	FILE *fp1, *fp2;
+
+	fp1 = fopen(file1,"r");
+	fp2 = fopen(file2,"r");
+    if (!fp1 || !fp2) {
+    	exit(EXIT_FAILURE);
+    }
+
+    // Allocate memory for the buffers
+    char * buf = malloc(1000*sizeof(char));
+	char buf1[100];
+	char buf2[100];
+
+	while ((fgets(buf1,100,fp1)!=NULL) && (fgets(buf2,100,fp2)!=NULL)) {
+        while (!strcmp(buf1, "\n")) {
+            fgets(buf1,100,fp1);
+        }
+
+        if (!strcmp(buf2, "\n")) {
+            fgets(buf2,100,fp2);
+        }
+
+		if(strcmp(buf1,buf2)!=0)
+		{
+			char *p = buf;
+			char *p1 = buf1;
+			char *p2 = buf2;
+			while(*p1 != '\0'){
+				*p++ = *p1++;
+			}
+			for(int i = 0; i<4; i++){
+				*p++='-';
+			}
+			*p++='\n';
+			while(*p2 != '\0'){
+				*p++ = *p2++;
+			}
+			*p ='\0';
+		    fclose(fp1);
+		    fclose(fp2);
+			return buf;
+		}
 	}
-	
-	char s1[100];
-	char s2[100];
-	
-	//fgets(s1, 100, f1);
-	//fgets(s2, 100, f2);
-	int cmp = 0;
-	do{
-		//cmp  0 && *s1 != EOF && *s2 != EOF){
-		fgets(s1, 100, f1);
-		fgets(s2, 100, f2);
-		cmp = strcmp(s1, s2);	
-	} while (cmp == 0 && s1 != NULL && s2 != NULL);
-	char con[] = "----\n";
-	char *s = malloc(sizeof(char) * (strlen(s1) + strlen(s2) + strlen(con) + 1));
-	if (cmp == 0){
-		free(s);
-		fclose(f1);
-		fclose(f2);
-		return NULL;
-	}
-	else {		
-		s = strcpy(s, s1);
-		s = strcat(s, con);
-		s = strcat(s, s2);
-		fclose(f1);
-		fclose(f2);
-		return s;
-	}
+
+    fclose(fp1);
+    fclose(fp2);
+	return NULL;
 }
