@@ -34,13 +34,13 @@ char* difference(const char *file1, const char* file2){
 	char buf1[100];
 	char buf2[100];
 
-	while ((fgets(buf1,100,fp1)!=NULL) && (fgets(buf2,100,fp2)!=NULL)) {
+	while ((fgets(buf1,sizeof(buf1),fp1)!=NULL) && (fgets(buf2,sizeof(buf2),fp2)!=NULL)) {
         while (!strcmp(buf1, "\n")) {
-            fgets(buf1,100,fp1);
+            fgets(buf1,sizeof(buf1),fp1);
         }
 
         if (!strcmp(buf2, "\n")) {
-            fgets(buf2,100,fp2);
+            fgets(buf2,sizeof(buf2),fp2);
         }
 
 		if(strcmp(buf1,buf2)!=0)

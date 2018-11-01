@@ -12,7 +12,7 @@ int dump_hex(const char *filename)
 	}
 	unsigned int count = 0;
 	int c = getc(f);
-	while (c != EOF) {	
+	while (c != EOF) {
 		for (unsigned int i = 0; i < 16 && c != EOF; i ++){
 			count++;
 			printf("%02x ", c);
@@ -22,5 +22,6 @@ int dump_hex(const char *filename)
 			printf("\n");
 		}
 	}
+    printf("\n");
 	return count;
 }
