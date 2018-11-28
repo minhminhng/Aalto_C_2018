@@ -2,13 +2,13 @@ Implement a system that tracks the exercise points for a course. The course has 
 
 System has the following functions:
 
-* *A number lastname firstname* : **Add student** : Adds a student by given student number to the database. Initially the student
+* *A number lastname firstname* : **Add student** Adds a student by given student number to the database. Initially the student
 has 0 points. For example: `A 234567 Opiskelija Osmo`
-* *U number round points *: Update points : Sets the points for exercise round "round". You can assume that there are at most 6 exercise rounds. The points will be integers. If the given student number does not exist, an error message should be given.
+* *U number round points *: **Update points** Sets the points for exercise round "round". You can assume that there are at most 6 exercise rounds. The points will be integers. If the given student number does not exist, an error message should be given.
 * *L* : **Print points** : Prints the stored students, with their student number, last name and first name, along with points of each exercise round and total points. The students should be printed in the order of total points such that the student with most total points will be printed first.
-* W filename : Save results : Writes the results to a file with given filename.
-* O filename : Load results : Loads the results from file, and replaces the existing results in memory.
-* Q : Exit program: Exits program and releases all allocated memory. This operation must be implemented so that you can find all possible memory leaks.
+* W filename : **Save results** Writes the results to a file with given filename.
+* O filename : **Load results** Loads the results from file, and replaces the existing results in memory.
+* Q : **Exit program**: Exits program and releases all allocated memory. This operation must be implemented so that you can find all possible memory leaks.
 
 In addition to the above commands, there should be a working main function that repeatedly asks commands from user and acts accordingly. The commands start with one captial letter and may be followed by some number of parameters, separated by space, depending on the command. Below is an example of possible input sequence:
 
