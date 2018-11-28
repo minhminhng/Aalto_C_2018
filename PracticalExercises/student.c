@@ -22,8 +22,11 @@ void add_student(Course* c, const char* name, const char* ID) {
     Student* new_student = &new_list[num];
     new_student->name = malloc((strlen(name) + 1) * sizeof(char));
     strcpy(new_student->name, name);
+    printf("%s ", ID);
     strcpy(new_student->ID, ID);
+    printf("new_student ID %s", new_student->ID);
     c->students = new_list;
+    printf("new_student ID %s\n", (&c->students[c->num_students])->ID);
     c->num_students += 1;
 }
 
@@ -32,18 +35,39 @@ void add_student(Course* c, const char* name, const char* ID) {
  */
 void remove_student(Course* c, const char* ID) {
     int num = c->num_students;
-    Student* new_list = malloc((num - 1) * sizeof(Student));
-    unsigned int count = 0;
-    while (count < num) {
-        Student* student = &c->students[count];
-        if (strcmp(student->ID, ID)) {
-            memcpy(new_list, student, sizeof(Student));
-            count++;
+    unsigned int exist = 0;
+
+    for (unsigned int i = 0; i < num; i++) {
+        Student* student = &c->students[i];
+        if (!strcmp(student->ID, ID)) {
+            exist = i;
+            free(student->name);
         }
     }
-    free(c->students);
-    c->students = new_list;
-    c->num_students -= 1;
+
+    // if (exist) {
+    //     Student* new_list = calloc((num - 1), sizeof(Student));
+    //     unsigned int count = 0;
+    //     for (unsigned int i = 0; i < num - 1; i++) {
+    //         Student* student = &c->students[i];
+    //         Student* new = &new_list[count];
+    //         if (i != exist) {
+    //             //memcpy(new, student, sizeof(Student));
+    //             new->name = malloc((strlen(student->name) + 1) * sizeof(char));
+    //             strcpy(new->name, student->name);
+    //             strcpy((&new_list[count])->ID, ID);
+    //             count++;
+    //             free(student->name);
+    //             // free(student);
+    //         }
+    //     }
+    //     free(c->students);
+    //     c->students = new_list;
+    //     if (c->num_students > 0) {
+    //         c->num_students -= 1;
+    //     }
+    //     new_list = NULL;
+    // }
 }
 
 int main(void) {
@@ -72,7 +96,7 @@ int main(void) {
     // Receive students' names and IDs from the user.
     while (1) {
         char name[30];
-        char ID[6];
+        char ID[7];
         char action[1];
         printf("What is the student's name? ");
         while (!scanf("%s", name)) { }
@@ -82,8 +106,8 @@ int main(void) {
 
         printf("What is the student's ID? ");
         while (!scanf("%s", ID)) { }
-        printf("Student %s, ", name);
-        printf("ID %s.\n", ID);
+        // printf("Student %s, ", name);
+        // printf("ID %s.\n", ID);
 
         // Check what the user wants to do.
         printf("Do you want to add or remove the student? (a or r) ");
@@ -98,7 +122,6 @@ int main(void) {
             printf("Action %s not found. Add student as default...", action);
             add_student(c, name, ID);
         }
-        // c->num_students = num_students;
     }
 
     printf("The course %s has %d students.\n", c->name, c->num_students);
@@ -106,7 +129,7 @@ int main(void) {
 
     for (unsigned int i = 0; i < c->num_students; i++) {
         Student* student = &c->students[i];
-        printf("%s  %s\n", student->name, student->ID);
+        printf("%s \t \t %s\n", student->name, student->ID);
     }
 
     for (unsigned int i = 0; i < c->num_students; i++) {
