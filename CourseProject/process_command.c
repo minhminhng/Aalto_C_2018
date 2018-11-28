@@ -31,7 +31,7 @@ int do_command(Course* course, char* buf)
 
     // Detect the command and implement the corresponding function.
     switch ((int)buf[0]) {
-        case 'A':
+        case 'A':       // Add student record
             if (count >= 3) {
                 printf("Adding student %s %s ...\n", command[1], command[2]);
                 add_student(course, command[0], command[1], command[2]);
@@ -40,7 +40,7 @@ int do_command(Course* course, char* buf)
                 printf("Not enough argument. Please try again.\n");
             }
             break;
-        case 'U':
+        case 'U':       // Update point for a round
             if (count >= 3) {
                 printf("Updating point of round %s for student number %s ...\n", command[1], command[0]);
                 update_point(course, command[0], atoi(command[1]), atoi(command[2]));
@@ -49,11 +49,11 @@ int do_command(Course* course, char* buf)
                 printf("Not enough argument. Please try again.\n");
             }
             break;
-        case 'L':
-            printf("Print all the students in desending order of total point.\n");
+        case 'L':       // Print students in descending order of total points
+            printf("Print all the students in descending order of total points.\n");
             print_points(course);
             break;
-        case 'W':
+        case 'W':       // Save the result to a file
             if (count >= 1) {
                 printf("Save the results to file %s...\n", command[0]);
                 save_results(course, command[0]);
@@ -62,7 +62,7 @@ int do_command(Course* course, char* buf)
                 printf("Not enough argument. Please try again.\n");
             }
             break;
-        case 'O':
+        case 'O':       // Load the result from a file
             if (count >= 1) {
                 printf("Load the results from file %s.\n", command[0]);
                 save_results(course, command[0]);
@@ -71,7 +71,7 @@ int do_command(Course* course, char* buf)
                 printf("Not enough argument. Please try again.\n");
             }
             break;
-        case 'Q':
+        case 'Q':       // Exit the program
             printf("Quit the program...\n");
             free(command);
             command = NULL;

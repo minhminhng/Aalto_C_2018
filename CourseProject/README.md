@@ -29,5 +29,6 @@ The program is compiled using `gcc -Wvla -Wall -g -std=c99`
 ### Note
 * Remember to allocate memory for string with an extra for '\0' character.
 * When free a pointer, the pointer is still valid, so if you need to compare it, change the pointer to NULL. Pay attention when the error "Invalid free()" is yielded by valgrind.
+* Remember to initialize the values.
 * Remember to check the consistency of data type.
 * `fscanf(f, "%*[^\n]\n", NULL);`is useful to ignore lines in a stream  [(http://www.cplusplus.com/reference/cstdio/fscanf/)](http://www.cplusplus.com/reference/cstdio/fscanf/)

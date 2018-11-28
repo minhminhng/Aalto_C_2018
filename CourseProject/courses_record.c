@@ -3,7 +3,8 @@
 #include <string.h>
 #include "courses_record.h"
 
-/* Add a new student to the course with id, first_namew last_name.
+/*
+ * Add a new student to the course with id, first_namew last_name.
  */
 void add_student(Course* course, char* id, char* first_name, char* last_name) {
 
@@ -22,9 +23,7 @@ void add_student(Course* course, char* id, char* first_name, char* last_name) {
     // Assign last_name
     student->last_name = malloc((strlen(last_name) + 1) * sizeof(char));
     strcpy(student->last_name, last_name);
-    for (unsigned int i = 0; i < 6; i++) {
-        student->points[i] = 0;
-    }
+    memset(student->points, 0, 6 * sizeof(int));
     student->total_point = 0;
 }
 
@@ -41,7 +40,7 @@ int isExist(Course* course, char* id) {
 }
 
 /*
- * Uupdate the point of the round 'round' for student whose ID is 'id'.
+ * Update the point of the round 'round' for student whose ID is 'id'.
  */
 void update_point(Course* course, char* id, int round, int point) {
     int n;
@@ -56,6 +55,9 @@ void update_point(Course* course, char* id, int round, int point) {
     }
 }
 
+/*
+ * Compare the total points.
+ */
 int compare_points(const void* a, const void* b) {
     Student* s1 = (Student*)a;
     Student* s2 = (Student*)b;
@@ -79,6 +81,9 @@ void print_points(Course* course) {
     }
 }
 
+/*
+ * Save the results to a file
+ */
 void save_results(Course* course, char* file) {
     FILE* f = fopen(file, "w");
     if (f == NULL) {
@@ -98,7 +103,9 @@ void save_results(Course* course, char* file) {
     fclose(f);
 }
 
-// Load the results from file, and replace the existng results in memory.
+/*
+ * Load the results from file, and replace the existng results in memory.
+ */
 void load_results(Course* course, char* file) {
     FILE* f = fopen(file, "r");
     if (f == NULL) {
@@ -123,7 +130,9 @@ void load_results(Course* course, char* file) {
     fclose(f);
 }
 
-// Exit program and release all allocated memory.
+/*
+ * Exit program and release all allocated memory.
+ */
 void exit_program(Course* course) {
     if (course->name) {
         free(course->name);
